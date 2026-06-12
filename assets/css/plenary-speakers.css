@@ -1,0 +1,59 @@
+.card {
+    display: flex;
+    align-items: center;
+    /* color: #FFF; */
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+    /* background-color: transparent; */
+    cursor: pointer;
+}
+
+.card-body {
+    max-width: 320px;
+    padding: 0;
+    text-align: center;
+}
+
+.card-img-top {
+    max-width: 200px;
+    border: 2px solid var(--secondary-light);
+    border-radius: 0;
+}
+
+.card-title {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 20px;
+    color: var(--secondary-light);
+}
+
+.card-text {
+    font-size: 13px;
+    text-align: center;
+    color: #000;
+}
+
+.modal_speakers .modal-content {
+    border: 6px solid var(--secondary-light);
+}
+
+.speakerName {
+    font-size: 25px;
+    color: var(--primary);
+}
+
+.speakerTitle {
+    font-size: 14px
+}
+
+.modal-header .close {
+    padding: 0 1rem;
+    margin: -1rem -1rem -1rem auto;
+    border: 0;
+    background: transparent;
+}
+
+.speaker_btn_close_cross {
+    font-size: 40px;
+    color: var(--primary);
+}
