@@ -3,15 +3,38 @@
 :root {
   --bg: #0b1220;
   --bg2: #0f1b33;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-strong: rgba(255, 255, 255, 0.06);
   --card: rgba(255, 255, 255, 0.06);
   --text: rgba(255, 255, 255, 0.92);
   --muted: rgba(255, 255, 255, 0.7);
   --faint: rgba(255, 255, 255, 0.55);
   --line: rgba(255, 255, 255, 0.12);
+  --header-bg: rgba(11, 18, 32, 0.65);
+  --skip-bg: #111827;
+  --overlay: rgba(0, 0, 0, 0.15);
+  --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.2);
   --primary: #6ee7ff;
   --primary2: #a78bfa;
   --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
   --radius: 16px;
+}
+
+html[data-theme="light"] {
+  --bg: #f6f8fc;
+  --bg2: #e8eef8;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.9);
+  --card: rgba(255, 255, 255, 0.86);
+  --text: #152238;
+  --muted: rgba(21, 34, 56, 0.78);
+  --faint: rgba(21, 34, 56, 0.62);
+  --line: rgba(21, 34, 56, 0.12);
+  --header-bg: rgba(246, 248, 252, 0.8);
+  --skip-bg: #ffffff;
+  --overlay: rgba(255, 255, 255, 0.6);
+  --shadow-soft: 0 10px 28px rgba(21, 34, 56, 0.08);
+  --shadow: 0 12px 40px rgba(21, 34, 56, 0.12);
 }
 
 * {
@@ -41,6 +64,7 @@ body {
     radial-gradient(900px 600px at 90% 20%, rgba(167, 139, 250, 0.15), transparent 70%),
     linear-gradient(180deg, var(--bg), var(--bg2));
   line-height: 1.55;
+  transition: background 180ms ease, color 180ms ease;
 }
 
 a {
@@ -63,7 +87,8 @@ a:hover {
   left: -999px;
   top: 10px;
   padding: 10px 12px;
-  background: #111827;
+  background: var(--skip-bg);
+  color: var(--text);
   border: 1px solid var(--line);
   border-radius: 10px;
   z-index: 999;
@@ -78,7 +103,7 @@ a:hover {
   top: 0;
   z-index: 20;
   backdrop-filter: blur(10px);
-  background: rgba(11, 18, 32, 0.65);
+  background: var(--header-bg);
   border-bottom: 1px solid var(--line);
 }
 
@@ -122,14 +147,32 @@ a:hover {
   border-radius: 10px;
 }
 
-.nav a:hover {
+.nav a:hover,
+.theme-toggle:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--surface-strong);
 }
 
 .nav-cta {
   border: 1px solid rgba(110, 231, 255, 0.35);
   color: var(--text) !important;
+}
+
+.theme-toggle {
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--muted);
+  padding: 8px 12px;
+  border-radius: 10px;
+  font: inherit;
+  cursor: pointer;
+  transition: color 120ms ease, background 120ms ease, border-color 120ms ease, transform 120ms ease;
+}
+
+.theme-toggle:focus-visible {
+  outline: 2px solid rgba(110, 231, 255, 0.6);
+  outline-offset: 2px;
 }
 
 .hero {
@@ -177,7 +220,7 @@ h1 {
   padding: 10px 14px;
   border-radius: 12px;
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--surface);
   text-decoration: none;
   color: var(--text);
   transition: transform 120ms ease, background 120ms ease, border-color 120ms ease;
@@ -186,7 +229,7 @@ h1 {
 .button:hover {
   transform: translateY(-1px);
   border-color: rgba(255, 255, 255, 0.18);
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--surface-strong);
 }
 
 .button.primary {
@@ -202,7 +245,7 @@ h1 {
 
 .hero-card {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--surface);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 18px;
@@ -214,7 +257,7 @@ h1 {
   padding: 12px 12px;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.12);
-  background: rgba(0, 0, 0, 0.15);
+  background: var(--overlay);
 }
 
 .stat-value {
@@ -235,6 +278,10 @@ h1 {
   background: rgba(255, 255, 255, 0.02);
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
+}
+
+html[data-theme="light"] .section-alt {
+  background: rgba(255, 255, 255, 0.42);
 }
 
 h2 {
@@ -270,10 +317,10 @@ p {
 
 .card {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--surface);
   border-radius: var(--radius);
   padding: 16px 16px;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--shadow-soft);
 }
 
 .list {
@@ -300,7 +347,7 @@ p {
 
 .contact-card {
   border: 1px solid var(--line);
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--surface);
   border-radius: var(--radius);
   padding: 16px 16px;
 }
@@ -345,7 +392,7 @@ p {
 
 .footer-right a:hover {
   color: var(--text);
-  background: rgba(255, 255, 255, 0.06);
+  background: var(--surface-strong);
 }
 
 @media (max-width: 900px) {

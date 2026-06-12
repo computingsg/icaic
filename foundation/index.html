@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,6 +35,9 @@
           <a href="#mission">Mission</a>
           <a href="#programs">Programs</a>
           <a href="#get-involved">Get involved</a>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+            <span class="theme-toggle-text">Light mode</span>
+          </button>
           <a class="nav-cta" href="#contact">Contact</a>
         </nav>
       </div>
@@ -245,6 +248,32 @@
     </footer>
 
     <script>
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("themeToggle");
+      const themeToggleText = themeToggle.querySelector(".theme-toggle-text");
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      const storedTheme = localStorage.getItem("icaic-foundation-theme");
+      const systemPrefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
+
+      function applyTheme(theme) {
+        const nextTheme = theme === "light" ? "light" : "dark";
+        const isLight = nextTheme === "light";
+
+        root.setAttribute("data-theme", nextTheme);
+        themeToggle.setAttribute("aria-pressed", String(isLight));
+        themeToggle.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
+        themeToggleText.textContent = isLight ? "Dark mode" : "Light mode";
+        themeMeta.setAttribute("content", isLight ? "#F6F8FC" : "#0B1220");
+      }
+
+      applyTheme(storedTheme || (systemPrefersLight ? "light" : "dark"));
+
+      themeToggle.addEventListener("click", () => {
+        const nextTheme = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+        localStorage.setItem("icaic-foundation-theme", nextTheme);
+        applyTheme(nextTheme);
+      });
+
       document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
